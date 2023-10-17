@@ -1,5 +1,11 @@
-const { createUserService, loginUserService, getAllusersService } = require('../services/user.service');
+//Importando userServices
+const {
+  createUserService,
+  loginUserService,
+  getAllusersService
+} = require('../services/user.service');
 
+// Controlador para crear un nuevo usuario
 const createUser = async (req, res) => {
   try {
     const newUser = await createUserService(req.body);
@@ -9,6 +15,7 @@ const createUser = async (req, res) => {
   }
 };
 
+// Controlador para iniciar sesión de un usuario
 const loginUser = async (req, res) => {
   try {
     const logedUser = await loginUserService(req.body);
@@ -19,6 +26,7 @@ const loginUser = async (req, res) => {
   }
 };
 
+// Controlador para obtener todos los usuarios
 const getAllUsers = async (req, res) => {
   try {
     const users = await getAllusersService(req.headers);
@@ -29,6 +37,7 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+//Exportando controladores de usuarios
 module.exports = {
   createUser,
   loginUser,

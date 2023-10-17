@@ -1,7 +1,9 @@
+// Importa los módulos necesarios
 const User = require('../models/user.model');
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 
+//Servicio para crear un nuevo usuario
 const createUserService = async ({ userName, email, password, admin }) => {
   // Genera un salt para el proceso de hash
   const saltRounds = 10;
@@ -26,6 +28,7 @@ const createUserService = async ({ userName, email, password, admin }) => {
   return newUser;
 };
 
+//Servicio para iniciar sesion
 const loginUserService = async ({ userName, email, password }) => {
   let userFounded;
   const SECRET_KEY = process.env.SECRET_KEY;
@@ -57,6 +60,7 @@ const loginUserService = async ({ userName, email, password }) => {
     userWithoutPassword
   };
 
+  //Metodo para generar un jwt
   const token = jwt.sign(payload, SECRET_KEY, {
     expiresIn: "10h",
   });
@@ -64,6 +68,7 @@ const loginUserService = async ({ userName, email, password }) => {
   return { token, userWithoutPassword };
 };
 
+//Servicio para obtener todos los usuarios con o sin filtros
 const getAllusersService = async ({ username, email, admin }) => {
   let query = {}; // Consulta inicial sin filtros
 
